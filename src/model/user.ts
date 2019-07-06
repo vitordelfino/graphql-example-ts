@@ -1,5 +1,17 @@
 import {prop, Typegoose} from "typegoose";
-import {Arg, Args, ArgsType, Ctx, Field, Mutation, ObjectType, Query, Resolver} from "type-graphql";
+import {
+    Arg,
+    Args,
+    ArgsType,
+    Ctx,
+    Field, FieldResolver,
+    Mutation,
+    ObjectType,
+    Query,
+    Resolver,
+    Root
+} from "type-graphql";
+import {Task, TaskSchema} from "./task";
 import "reflect-metadata"
 
 @ObjectType({ description: 'User model' })
@@ -12,10 +24,12 @@ export class User extends Typegoose {
 
     @prop()
     @Field(type => String, { nullable: false })
-    email?: string
+    email?: string;
 
     @Field(type => String, { nullable: true })
-    _id?: string
+    _id?: string;
+
+
 }
 
 export const UserSchema = new User().getModelForClass(User, {
@@ -40,6 +54,11 @@ export class UserQuery {
     @Query(returns => [User])
     async users() {
         return await UserSchema.find({})
+    }
+
+    @FieldResolver(type => [Task])
+    async tasks(@Root() user: User) {
+        return await TaskSchema.find({ user: user['_doc']._id });
     }
 }
 
