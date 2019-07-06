@@ -1,5 +1,4 @@
 import {prop, Typegoose} from "typegoose";
-import {IsDefined, IsEmail, IsString} from "class-validator";
 import {Arg, Args, ArgsType, Ctx, Field, Mutation, ObjectType, Query, Resolver} from "type-graphql";
 import "reflect-metadata"
 
@@ -7,14 +6,10 @@ import "reflect-metadata"
 @ArgsType()
 export class User extends Typegoose {
 
-    @IsDefined()
-    @IsString()
     @prop()
     @Field(type => String, { nullable: false })
     name?: string;
 
-    @IsDefined()
-    @IsEmail()
     @prop()
     @Field(type => String, { nullable: false })
     email?: string
