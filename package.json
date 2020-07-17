@@ -12,7 +12,7 @@
   "dependencies": {
     "class-validator": "^0.9.1",
     "graphql": "^14.4.2",
-    "lodash": "^4.17.13",
+    "lodash": "^4.17.19",
     "mongoose": "^5.7.5",
     "reflect-metadata": "^0.1.13",
     "type-graphql": "^0.17.4",
